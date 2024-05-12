@@ -45,11 +45,13 @@ Para inicar a análise exploratória do projeto (notebook) na sua máquina, faç
 Para inicar o pipeline de inferência (API) na sua máquina, faça:
 
 ```cd api```
+
 ```python -m uvicorn main:app --reload```
 
 Para executar o pipeline de treino (API) na sua máquina, faça:
 
 ```cd train```
+
 ```python main.py --env PROD```
 
 ### Fazendo deploy do pipeline de inferência (API)
@@ -60,12 +62,16 @@ Neste caso iremos fazer deploy do código que está em ```api/v1.0.0```.
 Nosso primeiro passo será criar um novo repositório no GitHub. Para isso, acesse sua conta no GitHub e faça a criação deste novo repositório manualmente. 
 
 Após criar o repositório, volte para o seu diretório de trabalho (mesmo nível do diretório ```bootcamp```, **não** dentro do mesmo) na sua máquina e clone o projeto que você acabou de criar:
+
 ```git clone <<seu-novo-repositório>>```
 
 Agora basta mover todos os arquivos que estão no diretório ```api/v1.0.0``` para o novo diretório clonado na sua máquina.
 Em seguida, executar os seguintes comandos para fazer o push para a main branch do seu repositório:
+
 ```git add .```
+
 ```git commit -m "meu primeiro deploy"```
+
 ```git push origin main```
 
 Até aqui, você já tem um repositório GitHub com o código da API na branch ````main``. Agora vamos criar um app no Render.
