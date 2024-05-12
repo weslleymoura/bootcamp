@@ -7,6 +7,8 @@ Nesta página você encontrará todas as informações necessárias para acompan
 Antes de começar, você terá que instalar os seguintes softwares na sua máquina:
 * [Anaconda](https://www.anaconda.com/download) 
 * [Python 3.10](https://www.python.org/downloads/)
++ [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [Git Large File Storage](https://docs.github.com/pt/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)
 
 Como o passo a passo para instalação depende de cada sistema operacional, esta parte fica por conta de vocês. 
 
@@ -22,17 +24,25 @@ Uma vez que o ambiente foi criado, devemos ativá-lo.
 
 ### Clonando o repositório do projeto
 
-Abra o terminal da sua máquina e navegue até o diretório em que deseja salvar o projeto. Em seguida, faça o clone do projeto.
+Primeiramente, você deve acessar o repositório original do projeto em https://github.com/weslleymoura/bootcamp e fazer um **fork**. Isso fará com que uma cópia do projeto seja salva na sua própria conta do GitHub (na forma de um novo repositório). 
 
-```git clone git@github.com:weslleymoura/bootcamp.git```
+**Após o fork**, abra o terminal da sua máquina e navegue até o diretório em que deseja salvar o projeto. Em seguida, faça o clone do projeto.
 
-(Alternativamente, via https) ```https://github.com/weslleymoura/bootcamp.git```
+```git clone <<url-do-seu-repositório>>```
 
-### Instalando as dependências do projeto no seu ambiente python
+### Configurando o "Git Large File Storage"
+
+Em nosso projeto, temos uma arquivo considerado muito grande pelo GitHub. Por este motivo, temos que adicioná-lo ao controle do ```lfs``, assim poderemos armazenar este arquivo no GitHub sem nenhum problema.
 
 Agora acesse a pasta do projeto que acabou se ser clonado na sua máquina
 
 ```cd bootcamp ```
+
+E adicione a extensão ```.ipynb``` ao tracking do ```lfs```
+
+```git lfs track "*.ipynb"```
+
+### Instalando as dependências do projeto no seu ambiente python
 
 Em seguida, instale os pacotes python no seu ambiente. Note que **você deve manter seu ambiente python ativado**.
 
