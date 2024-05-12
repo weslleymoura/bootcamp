@@ -62,6 +62,7 @@ Para deploy da API deste projeto, vamos utilizar o [Render](https://dashboard.re
 Neste caso iremos fazer deploy do código que está em ```api/v1.0.0```.
 
 Nosso primeiro passo será criar um novo repositório no GitHub. Para isso, acesse sua conta no GitHub e faça a criação deste novo repositório manualmente. 
+Apenas para referência, o meu ficou assim: https://github.com/weslleymoura/bootcamp-api
 
 Após criar o repositório, volte para o seu diretório de trabalho (mesmo nível do diretório ```bootcamp```, **não** dentro do mesmo) na sua máquina e clone o projeto que você acabou de criar:
 
