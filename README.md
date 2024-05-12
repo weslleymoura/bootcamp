@@ -1,4 +1,4 @@
-## Bootcamp data science / ML Ops
+## Bootcamp Data Science / ML Ops
 
 Nesta página você encontrará todas as informações necessárias para acompanhar este bootcamp.
 
