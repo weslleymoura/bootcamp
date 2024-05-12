@@ -24,7 +24,9 @@ Uma vez que o ambiente foi criado, devemos ativá-lo.
 
 Abra o terminal da sua máquina e navegue até o diretório em que deseja salvar o projeto. Em seguida, faça o clone do projeto.
 
-```git clone ...```
+```git clone git@github.com:weslleymoura/bootcamp.git```
+
+(Alternativamente, via https) ```https://github.com/weslleymoura/bootcamp.git```
 
 ### Instalando as dependências do projeto no seu ambiente python
 
