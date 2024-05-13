@@ -42,7 +42,7 @@ E adicione a extensão ```.ipynb``` ao tracking do ```lfs```
 
 ```git lfs track "*.ipynb"```
 
-Note: como já configuramos isso durante a criação do projeto, a extensão ```.ipynb``` já está adicionado ao arquivo ```.gitattributes```. Portanto, pode ser que apareça a mensagem *"*.ipynb" already supported*. Não há nenhum problema, mantive o procedimento aqui apenas pata tê-lo como referência quando precisar fazer este tipo de configuração em projetos novos.
+Note: como já configuramos isso durante a criação do projeto, a extensão ```.ipynb``` já está adicionado ao arquivo ```.gitattributes```. Portanto, pode ser que apareça a mensagem **"*.ipynb" already supported**. Não há nenhum problema, mantive o procedimento aqui apenas pata tê-lo como referência quando precisar fazer este tipo de configuração em projetos novos.
 
 ### Instalando as dependências do projeto no seu ambiente python
 
@@ -62,11 +62,17 @@ Para inicar o pipeline de inferência (API) na sua máquina, faça:
 
 ```python -m uvicorn main:app --reload```
 
-Para executar o pipeline de treino (API) na sua máquina, faça:
+Para executar o pipeline de treino na sua máquina, faça:
 
 ```cd train```
 
 ```python main.py --env PROD```
+
+Para fazer deploy de um novo pipeline de inferência (API) na sua máquina, faça:
+
+```cd deploy```
+
+```python deploy.py --version 1.0.0```
 
 ### Fazendo deploy do pipeline de inferência (API)
 
