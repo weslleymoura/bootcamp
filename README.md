@@ -42,6 +42,8 @@ E adicione a extensão ```.ipynb``` ao tracking do ```lfs```
 
 ```git lfs track "*.ipynb"```
 
+Note: como já configuramos isso durante a criação do projeto, a extensão ```.ipynb``` já está adicionado ao arquivo ```.gitattributes```. Portanto, pode ser que apareça a mensagem *"*.ipynb" already supported*. Não há nenhum problema, mantive o procedimento aqui apenas pata tê-lo como referência quando precisar fazer este tipo de configuração em projetos novos.
+
 ### Instalando as dependências do projeto no seu ambiente python
 
 Em seguida, instale os pacotes python no seu ambiente. Note que **você deve manter seu ambiente python ativado**.
