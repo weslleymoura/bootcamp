@@ -41,12 +41,11 @@ def main(version):
         app_config.read(dir_deploy_new_version + '/config/app_config.ini')
         app_config.set('PROD', 'version', version)
         app_config.set('DEV', 'version', version)
-        
-
-        # Writing our configuration file to 'example.ini'
         with open(dir_deploy_new_version + '/config/app_config.ini', 'w') as configfile:
             app_config.write(configfile)
-        
+
+        # Copia requirements.txt
+        shutil.copyfile('../requirements.txt', dir_deploy_new_version + '/requirements.txt')
     
 if __name__ == "__main__":
 

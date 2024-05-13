@@ -117,3 +117,4 @@ Segue abaixo algumas referências usadas neste projeto.
 * https://stackoverflow.com/questions/18393498/gitignore-all-the-ds-store-files-in-every-folder-and-subfolder
 * https://medium.com/@elton-martins/to-reset-a-git-branch-to-match-the-master-main-branch-6692c28a36fc
 * https://docs.github.com/pt/repositories/working-with-files/managing-large-files/installing-git-large-file-storage
+* https://stackoverflow.com/questions/76187211/warning-the-ecdsa-host-key-for-github-com-differs-from-the-key-for-the-ip-ad
