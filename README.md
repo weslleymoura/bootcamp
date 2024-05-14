@@ -70,7 +70,7 @@ Para executar o pipeline de treino na sua máquina, faça:
 
 Para fazer deploy de um novo pipeline de inferência (API) na sua máquina, faça:
 
-```cd deploy```
+```cd dist```
 
 ```python deploy.py --version 1.0.0```
 

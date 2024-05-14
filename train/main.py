@@ -7,10 +7,16 @@ import numpy as np
 from joblib import dump
 from src.estimator import BootcampEstimator
 import argparse
+import logging
 import warnings
 warnings.filterwarnings('ignore')
 
+logger = logging.getLogger(__name__)
+logging.basicConfig(filename='logs/app.log', filemode = 'w', level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def main(env):
+
+    logger.info('started main')
 
     #---------------------------------------------------------------
     # Instancia o estimator
@@ -80,7 +86,7 @@ def main(env):
     # Salva os data points de exemplo
     dump(sample_points, 'model/sample_points.joblib')
 
-
+    logger.info('ended main')
 
 if __name__ == "__main__":
 

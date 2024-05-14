@@ -7,7 +7,9 @@ from yellowbrick.cluster import KElbowVisualizer
 import random
 from joblib import dump
 import geopy.distance
+import logging 
 
+logger = logging.getLogger(__name__)
 
 class BootcampEstimator:
 
@@ -17,6 +19,8 @@ class BootcampEstimator:
         self.env = env
         self.app_config = self.get_app_config(env)
         self.version = self.app_config['version']
+
+        logger.info('constructor executed')
     
     # Carrega das configurações da aplicação
     def get_app_config (self, env):
