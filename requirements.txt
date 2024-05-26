@@ -6,3 +6,6 @@ folium==0.14.0
 brazilcep==6.2.0
 geopy==2.4.1
 fastapi==0.111.0
+mkdocs==1.6.0
+mkdocstrings-python==1.10.2
+mkdocs-material==9.5.23

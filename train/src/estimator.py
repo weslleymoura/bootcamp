@@ -7,6 +7,7 @@ from yellowbrick.cluster import KElbowVisualizer
 import random
 from joblib import dump
 import geopy.distance
+from typing import Union
 import logging 
 
 logger = logging.getLogger(__name__)
@@ -31,6 +32,7 @@ class BootcampEstimator:
     
     # Função para treinar o modelo
     def fit(self, points, input_points):
+        
 
         #---------------------------------------------------------------
         # Treinando o modelo
