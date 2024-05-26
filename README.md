@@ -101,6 +101,22 @@ Seguindo o template, basta escolher o repositório GitHub da sua API e definir o
 
 ```puvicorn main:app --host 0.0.0.0 --port $PORT```
 
+### Gerando a documentação do projeto
+
+Para atualizar a documentação do projeto, você deve recriar o website do projeto:
+
+```mkdocs build```
+
+Se quiser testar a documentação na sua máquina, faça:
+
+```mkdocs serve```
+
+E quando quiser publicar a documentação no GitHub pages, faça:
+
+```mkdocs gh-deploy```
+
+O comando acima é responsável por copiar os aquivos do diretório ```/site``` para uma nova branch no GitHub chamada ```gh-pages```
+
 ### Referências
 
 Segue abaixo algumas referências usadas neste projeto.
