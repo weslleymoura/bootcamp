@@ -1,0 +1,49 @@
+name: Run Python Script on Specific File Merge
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  check-and-run:
+    runs-on: ubuntu-latest
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 2: Set up Python
+      - name: Set up Python
+        uses: actions/setup-python@v4
+
+      # Step 3: Get list of changed files
+      - name: Get list of changed files
+        id: changed-files
+        run: |
+          git diff --name-only HEAD^ HEAD > changed_files.txt
+          cat changed_files.txt
+
+      # Step 4: Check if specific file is in the changed files list
+      - name: Check if specific file is changed
+        id: specific-file-check
+        run: |
+          if grep -q "config/app_config.ini" changed_files.txt; then echo "file_changed=true" >> $GITHUB_ENV; else echo "file_changed=false" >> $GITHUB_ENV; fi
+
+      # Step 5: Extract run_id from config/app_config.ini if the specific file is changed
+      - name: Extract run_id
+        if: env.file_changed == 'true'
+        id: extract-run-id
+        run: |
+          run_id=$(grep -oP '(?<=run_id = ).*' config/app_config.ini)
+          echo "RUN_ID=$run_id" >> $GITHUB_ENV
+
+      # Step 6: Run the Python script if the specific file is changed
+      - name: Run Python Script
+        if: env.file_changed == 'true'
+        env:
+          RUN_ID: ${{ env.RUN_ID }}
+        run: |
+          python path/to/your_script.py --model_name bootcamp.kmeans-clustering --run_id ${{ env.RUN_ID }}

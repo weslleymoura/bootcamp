@@ -50,6 +50,23 @@ Em seguida, instale os pacotes python no seu ambiente. Note que **você deve man
 
 ```pip install -r requirements.txt```
 
+### Crindo o banco de dados do projeto na sua máquina
+
+Acesse o prompt do Postgres:
+```psql```
+
+E depois execute os seguintes comandos para criar o banco de dados, usuário e permissões:
+
+```create database bootcamp_db;```
+```create user bootcamp_user with encrypted password 'admin';```
+```grant all privileges on database bootcamp_db to bootcamp_user;```
+
+Para se conectar ao banco de dados criado, digite:
+```\c bootcamp_db```
+
+No futoro, quando criarmos nossas tabelas, você poderá consultar os dados com o comando abaixo:
+```select * from api_call;```
+
 ### Iniciando os projetos na sua máquina
 
 Para inicar a análise exploratória do projeto (notebook) na sua máquina, faça:
@@ -135,3 +152,8 @@ Segue abaixo algumas referências usadas neste projeto.
 * https://docs.github.com/pt/repositories/working-with-files/managing-large-files/installing-git-large-file-storage
 * https://stackoverflow.com/questions/76187211/warning-the-ecdsa-host-key-for-github-com-differs-from-the-key-for-the-ip-ad
 * https://realpython.com/python-project-documentation-with-mkdocs/
+* https://medium.com/@kevinkoech265/a-guide-to-connecting-postgresql-and-pythons-fast-api-from-installation-to-integration-825f875f9f7d
+* https://blog.stackademic.com/python-building-simple-api-with-fastapi-and-postgresql-d5ddd7d501b7
+* https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
+
+

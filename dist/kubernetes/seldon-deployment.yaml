@@ -1,0 +1,42 @@
+apiVersion: machinelearning.seldon.io/v1alpha2
+kind: SeldonDeployment
+metadata:
+  name: mlflow
+spec:
+  name: clustering-model
+  predictors:
+    - graph:
+        children: []
+        implementation: MLFLOW_SERVER
+        modelUri: s3://mlflow-s3-bucket/bootcamp/clustering-model/
+        name: classifier
+        envSecretRefName: aws-secret
+      name: default
+      replicas: 1
+      componentSpecs:
+        - spec:
+            containers:
+            - name: classifier
+              livenessProbe:
+                    failureThreshold: 3
+                    initialDelaySeconds: 450
+                    periodSeconds: 5
+                    successThreshold: 1
+                    tcpSocket:
+                      port: http
+                    timeoutSeconds: 1
+              readinessProbe:
+                    failureThreshold: 6
+                    initialDelaySeconds: 450
+                    periodSeconds: 5
+                    successThreshold: 1
+                    tcpSocket:
+                      port: http
+                    timeoutSeconds: 1
+              resources:
+                requests:
+                  memory: "1Gi"
+                  cpu: 1
+                limits:
+                  memory: "1Gi"
+                  cpu: 1

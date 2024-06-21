@@ -1,0 +1,10 @@
+channels:
+- defaults
+dependencies:
+- python=3.8
+- scikit-learn
+- mlflow
+- pandas
+- pip:
+  - mlflow==2.13.1
+name: custom_model_env
