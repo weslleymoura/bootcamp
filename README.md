@@ -65,16 +65,16 @@ Acesse o seu **working dir** e digite:
 
 **APENAS PARA REFERÊNCIA (NÃO É NECESSÁRIO EXECUTAR AGORA):**
 
-Quando quiser interremper a execução dos serviços, digite: 
+* Quando quiser interremper a execução dos serviços, digite: 
 ```docker-compose down --rmi all --volumes --remove-orphans```
 
-Se precisar interromper todos os serviços docker em execução na sua máquina, digite:
+* Se precisar interromper todos os serviços docker em execução na sua máquina, digite:
 ```docker stop $(docker ps -a -q)```
 
-Se precisar acessar o container de um dos serviços docker, digite:
+* Se precisar acessar o container de um dos serviços docker, digite:
 ```docker exec -it <container_id_or_name> /bin/bash```
 
-Se precisar executar algo em alguns dos containers (e.g.: container client), digite:
+* Se precisar executar algo em alguns dos containers (e.g.: container client), digite:
 ```docker-compose run client /bin/bash```
 
 ## Referências
