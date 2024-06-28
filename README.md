@@ -1,8 +1,8 @@
-## Bootcamp Data Science / ML Ops
+# Bootcamp Data Science / ML Ops
 
 Nesta página você encontrará todas as informações necessárias para acompanhar este bootcamp.
 
-### Pré-requisitos
+## Pré-requisitos
 
 Antes de começar, você terá que instalar os seguintes softwares na sua máquina:
 
@@ -17,7 +17,7 @@ Como o passo a passo para instalação depende de cada sistema operacional, esta
 
 Você também precisa criar uma conta no GitHub para acompanhar o projeto. Crie sua conta em [https://github.com/](https://github.com/).
 
-### Criando um ambiente python com conda
+## Criando um ambiente python com conda
 
 Nosso primeiro passo será a criação do nosso ambiente python. Isso é importante, pois é aqui que garantimos que todos os pacotes utilizados no projeto estão instalados.
 
@@ -27,11 +27,11 @@ Uma vez que o ambiente foi criado, devemos ativá-lo.
 
 ```conda activate bootcamputilenv```
 
-### Clonando o repositório do projeto
+## Clonando o repositório do projeto
 
 Primeiramente, você deve acessar o repositório original do projeto em https://github.com/weslleymoura/bootcamp e fazer um **fork**. Isso fará com que uma cópia do projeto seja salva na sua própria conta do GitHub (na forma de um novo repositório). 
 
-<img src="images/git-fork.png" width="200">
+<img src="images/git-fork.png" width="400">
 
 **Após o fork**, abra o terminal da sua máquina e navegue até o <b>diretório em que deseja salvar o projeto</b> (ao longo do projeto, iremos nos referir a este diretório como <b>woorking dir</b>). 
 
@@ -40,9 +40,10 @@ Em seguida, faça o clone do projeto:
 ```git clone <<url-do-seu-repositório>>```
 
 Para conseguir a url do seu projeto, acesse o repositório do GitHub que você acabou de fazer o fork (na sua conta to GitHub) e copie o seguinte endereço (HTTPS):
-<img src="images/git-clone.png" width="200">
 
-### Instalando as dependências do projeto no seu ambiente python
+<img src="images/git-clone.png" width="400">
+
+## Instalando as dependências do projeto no seu ambiente python
 
 Note que daqui em diante **você sempre deve manter seu ambiente python ativado**
 
@@ -50,13 +51,13 @@ Acesse o seu **working dir** e digite:
 
 ```pip install -r requirements.txt```
 
-### Iniciando o Jupyter Notebook na sua máquina
+## Iniciando o Jupyter Notebook na sua máquina
 
 Acesse o seu **working dir** e digite:
 
 ```jupyter lab```
 
-### Iniciando os serviços docker na sua máquina
+## Iniciando os serviços docker na sua máquina
 
 Acesse o seu **working dir** e digite:
 
@@ -76,7 +77,7 @@ Se precisar acessar o container de um dos serviços docker, digite:
 Se precisar executar algo em alguns dos containers (e.g.: container client), digite:
 ```docker-compose run client /bin/bash```
 
-### Referências
+## Referências
 
 Segue abaixo algumas referências usadas neste projeto.
 
