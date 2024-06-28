@@ -5,12 +5,17 @@ Nesta página você encontrará todas as informações necessárias para acompan
 ### Pré-requisitos
 
 Antes de começar, você terá que instalar os seguintes softwares na sua máquina:
+
 * [Anaconda](https://www.anaconda.com/download) 
+* [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+* [PGAdmin](https://www.pgadmin.org/)
+* [Docker Desktop](https://www.docker.com/products/docker-desktop/)
 * [Python 3.10](https://www.python.org/downloads/)
-+ [Git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-* [Git Large File Storage](https://docs.github.com/pt/repositories/working-with-files/managing-large-files/installing-git-large-file-storage)
+* [VSCode](https://code.visualstudio.com/)
 
 Como o passo a passo para instalação depende de cada sistema operacional, esta parte fica por conta de vocês. 
+
+Você também precisa criar uma conta no GitHub para acompanhar o projeto. Crie sua conta em [https://github.com/](https://github.com/).
 
 ### Criando um ambiente python com conda
 
@@ -26,113 +31,50 @@ Uma vez que o ambiente foi criado, devemos ativá-lo.
 
 Primeiramente, você deve acessar o repositório original do projeto em https://github.com/weslleymoura/bootcamp e fazer um **fork**. Isso fará com que uma cópia do projeto seja salva na sua própria conta do GitHub (na forma de um novo repositório). 
 
-**Após o fork**, abra o terminal da sua máquina e navegue até o diretório em que deseja salvar o projeto. Em seguida, faça o clone do projeto.
+<img src="images/git-fork.png" width="200">
+
+**Após o fork**, abra o terminal da sua máquina e navegue até o <b>diretório em que deseja salvar o projeto</b> (ao longo do projeto, iremos nos referir a este diretório como <b>woorking dir</b>). 
+
+Em seguida, faça o clone do projeto:
 
 ```git clone <<url-do-seu-repositório>>```
 
-### Configurando o "Git Large File Storage"
-
-Em nosso projeto, temos uma arquivo considerado muito grande pelo GitHub. Por este motivo, temos que adicioná-lo ao controle do ```lfs``, assim poderemos armazenar este arquivo no GitHub sem nenhum problema.
-
-Agora acesse a pasta do projeto que acabou se ser clonado na sua máquina
-
-```cd bootcamp ```
-
-E adicione a extensão ```.ipynb``` ao tracking do ```lfs```
-
-```git lfs track "*.ipynb"```
-
-Note: como já configuramos isso durante a criação do projeto, a extensão ```.ipynb``` já está adicionado ao arquivo ```.gitattributes```. Portanto, pode ser que apareça a mensagem **"*.ipynb" already supported**. Não há nenhum problema, mantive o procedimento aqui apenas pata tê-lo como referência quando precisar fazer este tipo de configuração em projetos novos.
+Para conseguir a url do seu projeto, acesse o repositório do GitHub que você acabou de fazer o fork (na sua conta to GitHub) e copie o seguinte endereço (HTTPS):
+<img src="images/git-clone.png" width="200">
 
 ### Instalando as dependências do projeto no seu ambiente python
 
-Em seguida, instale os pacotes python no seu ambiente. Note que **você deve manter seu ambiente python ativado**.
+Note que daqui em diante **você sempre deve manter seu ambiente python ativado**
+
+Acesse o seu **working dir** e digite:
 
 ```pip install -r requirements.txt```
 
-### Crindo o banco de dados do projeto na sua máquina
+### Iniciando o Jupyter Notebook na sua máquina
 
-Acesse o prompt do Postgres:
-```psql```
-
-E depois execute os seguintes comandos para criar o banco de dados, usuário e permissões:
-
-```create database bootcamp_db;```
-```create user bootcamp_user with encrypted password 'admin';```
-```grant all privileges on database bootcamp_db to bootcamp_user;```
-
-Para se conectar ao banco de dados criado, digite:
-```\c bootcamp_db```
-
-No futoro, quando criarmos nossas tabelas, você poderá consultar os dados com o comando abaixo:
-```select * from api_call;```
-
-### Iniciando os projetos na sua máquina
-
-Para inicar a análise exploratória do projeto (notebook) na sua máquina, faça:
+Acesse o seu **working dir** e digite:
 
 ```jupyter lab```
 
-Para inicar o pipeline de inferência (API) na sua máquina, faça:
+### Iniciando os serviços docker na sua máquina
 
-```cd api```
+Acesse o seu **working dir** e digite:
 
-```python -m uvicorn main:app --reload```
+```docker-compose up -d --build```
 
-Para executar o pipeline de treino na sua máquina, faça:
+**APENAS PARA REFERÊNCIA (NÃO É NECESSÁRIO EXECUTAR AGORA):**
 
-```cd train```
+Quando quiser interremper a execução dos serviços, digite: 
+```docker-compose down --rmi all --volumes --remove-orphans```
 
-```python main.py --env PROD```
+Se precisar interromper todos os serviços docker em execução na sua máquina, digite:
+```docker stop $(docker ps -a -q)```
 
-Para fazer deploy de um novo pipeline de inferência (API) na sua máquina, faça:
+Se precisar acessar o container de um dos serviços docker, digite:
+```docker exec -it <container_id_or_name> /bin/bash```
 
-```cd dist```
-
-```python deploy.py --version 1.0.0```
-
-### Fazendo deploy do pipeline de inferência (API)
-
-Para deploy da API deste projeto, vamos utilizar o [Render](https://dashboard.render.com/).
-Neste caso iremos fazer deploy do código que está em ```api/v1.0.0```.
-
-Nosso primeiro passo será criar um novo repositório no GitHub. Para isso, acesse sua conta no GitHub e faça a criação deste novo repositório manualmente. 
-Apenas para referência, o meu ficou assim: https://github.com/weslleymoura/bootcamp-api
-
-Após criar o repositório, volte para o seu diretório de trabalho (mesmo nível do diretório ```bootcamp```, **não** dentro do mesmo) na sua máquina e clone o projeto que você acabou de criar:
-
-```git clone <<seu-novo-repositório>>```
-
-Agora basta mover todos os arquivos que estão no diretório ```api/v1.0.0``` para o novo diretório clonado na sua máquina.
-Em seguida, executar os seguintes comandos para fazer o push para a main branch do seu repositório:
-
-```git add .```
-
-```git commit -m "meu primeiro deploy"```
-
-```git push origin main```
-
-Até aqui, você já tem um repositório GitHub com o código da API na branch ````main``. Agora vamos criar um app no Render.
-A forma mais simples para fazer o deploy da API no Render é por meio da utilização [deste template](https://docs.render.com/deploy-fastapi).
-Seguindo o template, basta escolher o repositório GitHub da sua API e definir o seguinte código para iniciar sua aplicação:
-
-```puvicorn main:app --host 0.0.0.0 --port $PORT```
-
-### Gerando a documentação do projeto
-
-Para atualizar a documentação do projeto, você deve recriar o website do projeto:
-
-```mkdocs build```
-
-Se quiser testar a documentação na sua máquina, faça:
-
-```mkdocs serve```
-
-E quando quiser publicar a documentação no GitHub pages, faça:
-
-```mkdocs gh-deploy```
-
-O comando acima é responsável por copiar os aquivos do diretório ```/site``` para uma nova branch no GitHub chamada ```gh-pages```
+Se precisar executar algo em alguns dos containers (e.g.: container client), digite:
+```docker-compose run client /bin/bash```
 
 ### Referências
 
@@ -155,5 +97,12 @@ Segue abaixo algumas referências usadas neste projeto.
 * https://medium.com/@kevinkoech265/a-guide-to-connecting-postgresql-and-pythons-fast-api-from-installation-to-integration-825f875f9f7d
 * https://blog.stackademic.com/python-building-simple-api-with-fastapi-and-postgresql-d5ddd7d501b7
 * https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e
-
-
+* https://medium.com/@sant1/using-minio-with-docker-and-python-cbbad397cb5d
+* https://blog.min.io/mlflow-tracking-and-minio/
+* https://pandego.medium.com/red-wine-elasticnet-and-dockerized-mlflow-with-postgres-and-minio-d5aee144d1df
+* https://github.com/mlflow/mlflow/blob/master/examples/mlflow_artifacts/example.py
+* https://safjan.com/deploying-mlflow-on-local-machine-using-docker/#google_vignette
+* https://medium.com/@debasishkumardas5/running-github-actions-locally-a-complete-guide-for-windows-mac-and-linux-users-34c45999c7cd
+* https://github.com/nektos/act?tab=readme-ov-file
+* https://www.freecodecamp.org/news/how-to-run-github-actions-locally/#lists
+* https://forums.docker.com/t/docker-no-space-left-on-device/69205/3

@@ -70,8 +70,11 @@ def main(env):
     # Registra o experimento no MLFlow
     #---------------------------------------------------------------
 
-    mlflow.set_tracking_uri("file://{}/mlruns".format(parent_path))
-    mlflow_experiment = mlflow.set_experiment('model-retrain')
+    # Create an instance of your custom model
+    custom_model = CustomModel(env = 'PROD')
+
+    mlflow.set_tracking_uri("http://localhost:5000")
+    mlflow.set_experiment(custom_model.app_config['ALL']['experiment_name'])
 
     with mlflow.start_run() as run:
 
@@ -92,9 +95,6 @@ def main(env):
         mlflow.log_artifact("temp/clustering_model.joblib", artifact_path = artifact_path)
         mlflow.log_artifact("config/app_config.ini", artifact_path = artifact_path)
         mlflow.log_input(mlflow.data.from_numpy(input_points), context="training")
-
-        # Create an instance of your custom model
-        custom_model = CustomModel(env = 'PROD')
 
         artifacts = {
             "app_config": f"runs:/{run_id}/{artifact_path}/app_config.ini",
@@ -130,14 +130,16 @@ def main(env):
 
     mlflow.end_run()
 
+    model_name = custom_model.app_config['ALL']['model_name']
+
     # Assim como fizemos anteriormente, podemos registrar este experimento como um novo modelo (ainda em dev)
     result = mlflow.register_model(
-        f"runs:/{run_id}/model", "dev.bootcamp.kmeans-clustering"
+        f"runs:/{run_id}/model", "dev.{}".format(model_name)
     )
 
     # Agora podemos marcar a versão do nosso modelo como candidato à produção
     client = MlflowClient()
-    client.set_registered_model_alias("dev.bootcamp.kmeans-clustering", "candidate-{}".format(run_id), result.version)
+    client.set_registered_model_alias("dev.{}".format(model_name), "candidate-{}".format(run_id), result.version)
 
     logger.info('ended main')
 

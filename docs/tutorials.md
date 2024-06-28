@@ -1,1 +1,0 @@
-Esta é a página de "tutorials" do nosso projeto.

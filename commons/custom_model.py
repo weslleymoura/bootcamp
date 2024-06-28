@@ -8,6 +8,7 @@ class CustomModel(mlflow.pyfunc.PythonModel):
     def __init__(self, env = 'PROD'):
         
         self.env = env
+        self.app_config = self.get_app_config('config/app_config.ini')
 
     def load_context(self, context):
 
@@ -22,8 +23,8 @@ class CustomModel(mlflow.pyfunc.PythonModel):
 
         # Load config variables
         self.covered_region_in_km = int(self.app_config[self.env]['covered_region_in_km'])
-        self.sample_points_location = self.app_config[self.env]['sample_points_location']
         self.run_id = self.app_config['ALL']['run_id']
+        self.model_name = self.app_config['ALL']['model_name']
         
     # Carrega das configurações da aplicação
     def get_app_config (self, app_config_path):
