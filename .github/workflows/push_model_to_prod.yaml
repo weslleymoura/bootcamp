@@ -9,7 +9,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  check-and-run:
+  push-model-to-prod:
     runs-on: ubuntu-latest
     steps:
       # Step 1: Checkout the repository
@@ -49,4 +49,4 @@ jobs:
         env:
           RUN_ID: ${{ env.RUN_ID }}
         run: |
-          python path/to/your_script.py --model_name bootcamp.kmeans-clustering --run_id ${{ env.RUN_ID }}
+          python dist/promote_model.py --model_name bootcamp.kmeans-clustering --run_id ${{ env.RUN_ID }}

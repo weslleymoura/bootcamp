@@ -77,6 +77,10 @@ Acesse o seu **working dir** e digite:
 * Se precisar executar algo em alguns dos containers (e.g.: container client), digite:
 ```docker-compose run client /bin/bash```
 
+## Iniciando o corso
+
+Se conseguiu chegar até aqui, então você está pronto para começar nosso curso! Acesse a primeira aula (bootcamp-project-part-1.ipynb) pelo ```jupyter lab```.
+
 ## Referências
 
 Segue abaixo algumas referências usadas neste projeto.
