@@ -18,9 +18,14 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # Step 2: Set up Python
+      # Step 2.A: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v4
+
+      # Step 2.B: Install dependencies
+      - name: Install dependencies
+        run: |
+          pip install mlflow==2.13.1
 
       # Step 3: Get list of changed files
       - name: Get list of changed files
