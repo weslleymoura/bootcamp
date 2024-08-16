@@ -95,16 +95,20 @@ services:
       AWS_SECRET_ACCESS_KEY: password
     command: tail -f /dev/null
 
-  app:
-    build:
-      context: .
-      dockerfile: "${DOCKERFILE:-Dockerfile}"
-    depends_on:
-      postgres-bootcamp:
-        condition: service_healthy
-    ports:
-      - "8000:8000"
-    environment:
-      - DATABASE_URL=postgresql://bootcamp_user:admin@postgres-bootcamp:5432/bootcamp_db
-      - PYTHONPATH=/app/api
-    command: /bin/sh -c "cd api && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000"
+  #app:
+  #  build:
+  #    context: .
+  #    dockerfile: "${DOCKERFILE:-Dockerfile}"
+  #  depends_on:
+  #    postgres-bootcamp:
+  #      condition: service_healthy
+  #  ports:
+  #    - "8000:8000"
+  #  environment:
+  #    DATABASE_URL: postgresql://bootcamp_user:admin@postgres-bootcamp:5432/bootcamp_db
+  #    PYTHONPATH: /app/api
+  #    MLFLOW_TRACKING_URI: http://mlflow-server:5000
+  #    MLFLOW_S3_ENDPOINT_URL: http://minio:9000
+  #    AWS_ACCESS_KEY_ID: user
+  #    AWS_SECRET_ACCESS_KEY: password
+  #  command: /bin/sh -c "cd api && python -m uvicorn main:app --reload --host 0.0.0.0 --port 8000"

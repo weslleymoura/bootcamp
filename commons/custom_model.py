@@ -93,6 +93,10 @@ class CustomModel(mlflow.pyfunc.PythonModel):
         # Cria uma lista com as chaves (keys) ordenadas pelos seus valores (values)
         res_sorted_keys = sorted(res, key=res.get, reverse=False)
     
+        print ("teste")
+        print (res_sorted_keys) 
+        print(centers)
+        
         # Prepara o resultado do endpoint
         results = {
             'is_region_covered': round(res[res_sorted_keys[0]], 2) <= covered_region_in_km,
