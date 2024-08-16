@@ -48,33 +48,28 @@ class CustomModel(mlflow.pyfunc.PythonModel):
             return self.get_cluster_centroids()
 
         elif method == 'get_model_version':
-            return self.get_model_version()
+            model_uri, run_id, version  = self.get_model_uri_by_name_and_alias('prod.{}'.format(self.model_name), 'champion')
+            return {
+                'version': version,
+                'run_id': run_id,
+                'model_uri': model_uri
+            }
             
         else:
             raise ValueError(f"Unknown method: {method}")
-        
+    
+    def get_model_uri_by_name_and_alias(self, model_name, alias):
 
-    def get_model_version(self):
-        
         # Initialize MLflow client
         client = mlflow.tracking.MlflowClient()
         
-        # Search all registered models
-        registered_models = client.search_registered_models()
+        # Get the model version details by alias
+        model_version_details = client.get_model_version_by_alias(name=model_name, alias=alias)
         
-        # Filter to find the models associated with the specified run ID
-        models_associated_with_run = []
-        for registered_model in registered_models:
-            for version in registered_model.latest_versions:
-                if version.run_id == self.run_id:
-                    models_associated_with_run.append({
-                        "model_name": registered_model.name,
-                        "aliases": registered_model.aliases,
-                        "version": version.version,
-                        "run_id": version.run_id
-                    })
+        # Construct the model URI
+        model_uri = f"models:/{model_name}/{model_version_details.version}"
         
-        return models_associated_with_run
+        return model_uri, model_version_details.run_id, model_version_details.version
         
     def make_predictions(self, data, model, covered_region_in_km):
     
@@ -92,10 +87,6 @@ class CustomModel(mlflow.pyfunc.PythonModel):
     
         # Cria uma lista com as chaves (keys) ordenadas pelos seus valores (values)
         res_sorted_keys = sorted(res, key=res.get, reverse=False)
-    
-        print ("teste")
-        print (res_sorted_keys) 
-        print(centers)
         
         # Prepara o resultado do endpoint
         results = {
@@ -103,8 +94,9 @@ class CustomModel(mlflow.pyfunc.PythonModel):
             'closest_center': {
                 'id': res_sorted_keys[0],
                 'distance_in_km': round(res[res_sorted_keys[0]], 2),
-                'lat': centers[res_sorted_keys[0]]['lat'],
-                'lng': centers[res_sorted_keys[0]]['lng']
+                # res_sorted_keys é uma lista, sendo que a primeira posição (cluster 1) eh igual a 0
+                'lat': centers[res_sorted_keys[0] - 1]['lat'],
+                'lng': centers[res_sorted_keys[0] - 1]['lng']
             }
         }
 
